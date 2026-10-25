@@ -23,7 +23,7 @@ export function setStorageItem<T>(key: string, value: T): void {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
-    console.warn(`Failed to save to localStorage: ${key}`, error);
+    console.warn(`保存到本地存储失败：${key}`, error);
   }
 }
 
@@ -34,7 +34,7 @@ export function removeStorageItem(key: string): void {
   try {
     localStorage.removeItem(key);
   } catch (error) {
-    console.warn(`Failed to remove from localStorage: ${key}`, error);
+    console.warn(`从本地存储删除失败：${key}`, error);
   }
 }
 
@@ -56,7 +56,7 @@ export function setStorageString(key: string, value: string): void {
   try {
     localStorage.setItem(key, value);
   } catch (error) {
-    console.warn(`Failed to save to localStorage: ${key}`, error);
+    console.warn(`保存到本地存储失败：${key}`, error);
   }
 }
 

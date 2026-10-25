@@ -49,7 +49,7 @@ export function ThinkingBlock({ steps, isThinking, thinkingDuration, hasError = 
           ) : (
             <CheckCircle2 className="w-4 h-4 text-green-500" />
           )}
-          <span className="font-medium">Thinking Process</span>
+          <span className="font-medium">思考过程</span>
           {!isThinking && thinkingDuration !== undefined && !hasError && (
             <span className="text-xs text-gray-400 dark:text-gray-500">
               ({formatDuration(thinkingDuration)})

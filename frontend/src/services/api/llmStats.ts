@@ -38,7 +38,7 @@ export async function getLLMStatsSummary(
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch LLM stats summary: ${response.status}`);
+    throw new Error(`获取统计概览失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -66,7 +66,7 @@ export async function getLLMStatsTimeSeries(
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch LLM stats time series: ${response.status}`);
+    throw new Error(`获取统计时间序列失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -92,7 +92,7 @@ export async function getLLMStatsDistributionByModule(
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch LLM stats module distribution: ${response.status}`);
+    throw new Error(`获取模块分布失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -118,7 +118,7 @@ export async function getLLMStatsDistributionByModel(
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch LLM stats model distribution: ${response.status}`);
+    throw new Error(`获取模型分布失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -144,7 +144,7 @@ export async function getConversationLLMStats(
   );
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch conversation LLM stats: ${response.status}`);
+    throw new Error(`获取对话统计失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -159,7 +159,7 @@ export async function getLLMStatsModules(token: string): Promise<ModulesListResp
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch LLM modules: ${response.status}`);
+    throw new Error(`获取模块列表失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -174,7 +174,7 @@ export async function getLLMStatsModels(token: string): Promise<ModelsListRespon
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch LLM models: ${response.status}`);
+    throw new Error(`获取模型列表失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -189,7 +189,7 @@ export async function getLLMStatsTools(token: string): Promise<ToolsListResponse
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch LLM tools: ${response.status}`);
+    throw new Error(`获取工具列表失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -219,7 +219,7 @@ export async function getLLMStatsDistributionByTool(
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch LLM stats tool distribution: ${response.status}`);
+    throw new Error(`获取工具分布失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -247,7 +247,7 @@ export async function getLLMStatsToolTimeSeries(
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch LLM tool time series: ${response.status}`);
+    throw new Error(`获取工具时间序列失败，状态码：${response.status}`);
   }
 
   return response.json();

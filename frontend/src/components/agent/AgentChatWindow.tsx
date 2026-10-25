@@ -134,22 +134,18 @@ function EmptyState({
             {/* <section className="relative flex-1 flex flex-col items-center justify-center overflow-hidden">
                 <div className="flex items-center gap-4">
                     <div className="w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-2xl flex items-center justify-center text-orange-600 dark:text-orange-400 shrink-0 overflow-hidden">
-                        <img src="/image.png" alt="CookHero Logo" className="w-full h-full object-contain p-2" />
+                        <img src="/image.png" alt="CookHero 图标" className="w-full h-full object-contain p-2" />
                     </div>
                     <div className="w-100 h-48 max-w-5xl mx-auto flex items-center justify-center">
                         <img
                             src="/image.png"
-                            alt="CookHero Logo"
+                            alt="CookHero 图标"
                             className="w-full max-w-4xl object-contain transition-all duration-500 group-hover:scale-105"
                         />
                     </div>
                     <div>
-                        <h2 className="text-3xl font-bold text-orange-600 dark:text-orange-400">
-                            Your Personal Agent
-                        </h2>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 max-w-md mt-1">
-                            Calculate, analyze, and plan with intelligent tools
-                        </p>
+                        <h2 className="text-3xl font-bold text-orange-600 dark:text-orange-400">你的私人助手</h2>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 max-w-md mt-1">用智能工具计算、分析与规划</p>
                     </div>
                 </div>
             </section> */}
@@ -159,7 +155,7 @@ function EmptyState({
                         <div className="w-100 h-48 max-w-5xl mx-auto flex items-center justify-center">
                             <img
                                 src="/image.png"
-                                alt="CookHero Logo"
+                                alt="CookHero 图标"
                                 className="w-full max-w-4xl object-contain transition-all duration-500 group-hover:scale-105"
                             />
                         </div>
@@ -171,18 +167,18 @@ function EmptyState({
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 w-full max-w-3xl mb-6 sm:mb-8">
                 <FeatureCard
                     icon={<Calculator className="w-5 h-5" />}
-                    title="Calculation"
-                    description="Unit conversions & scaling"
+                    title="计算"
+                    description="单位换算与配比缩放"
                 />
                 <FeatureCard
                     icon={<Code className="w-5 h-5" />}
-                    title="Data Analysis"
-                    description="Analyze nutritional data"
+                    title="数据分析"
+                    description="分析营养数据"
                 />
                 <FeatureCard
                     icon={<Bot className="w-5 h-5" />}
-                    title="Complex Planning"
-                    description="Meal prep & shopping lists"
+                    title="复杂规划"
+                    description="备餐与采购清单"
                 />
             </div>
 
@@ -274,7 +270,7 @@ function LoadingIndicator() {
             </div>
             <div className="space-y-2 pt-2">
                 <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span className="animate-pulse">Agent is thinking...</span>
+                    <span className="animate-pulse">智能助手正在思考…</span>
                 </div>
             </div>
         </div>

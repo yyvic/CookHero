@@ -29,7 +29,7 @@ export function AgentChatInput({
   onCancel,
   disabled = false,
   isStreaming = false,
-  placeholder = 'Ask Agent to calculate, analyze, or plan...',
+  placeholder = '让智能助手帮你计算、分析或规划…',
   externalValue,
   onExternalValueConsumed,
   token,
@@ -128,7 +128,7 @@ export function AgentChatInput({
 
       // Validate file type
       if (!SUPPORTED_FORMATS.includes(file.type)) {
-        console.warn(`Unsupported image format: ${file.type}`);
+        console.warn(`不支持的图片格式：${file.type}`);
         continue;
       }
 
@@ -147,7 +147,7 @@ export function AgentChatInput({
         });
         newPreviewUrls.push(URL.createObjectURL(file));
       } catch (err) {
-        console.error('Error processing image:', err);
+        console.error('图片处理失败：', err);
       }
     }
 
@@ -219,13 +219,13 @@ export function AgentChatInput({
             <div key={index} className="relative group">
               <img
                 src={url}
-                alt={`Upload ${index + 1}`}
+                alt={`上传图片 ${index + 1}`}
                 className="w-16 h-16 object-cover rounded-lg border border-gray-200 dark:border-gray-700"
               />
               <button
                 onClick={() => removeImage(index)}
                 className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                aria-label="Remove image"
+                aria-label="移除图片"
               >
                 <X className="w-3 h-3" />
               </button>
@@ -247,8 +247,8 @@ export function AgentChatInput({
               : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-300'
             }
           `}
-          title={images.length >= MAX_IMAGES ? `Maximum ${MAX_IMAGES} images` : 'Attach image'}
-          aria-label="Attach image"
+          title={images.length >= MAX_IMAGES ? `最多 ${MAX_IMAGES} 张图片` : '上传图片'}
+          aria-label="上传图片"
         >
           <Paperclip className="w-5 h-5" />
         </button>
@@ -269,7 +269,7 @@ export function AgentChatInput({
           onPaste={handlePaste}
           onCompositionStart={() => setIsComposing(true)}
           onCompositionEnd={() => setIsComposing(false)}
-          placeholder={images.length > 0 ? 'Describe your image or ask a question...' : placeholder}
+          placeholder={images.length > 0 ? '描述这张图片或提出你的问题…' : placeholder}
           rows={1}
           className="flex-1 max-h-[200px] py-1.5 px-2 bg-transparent border-none focus:ring-0 focus:outline-none resize-none text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 text-sm leading-relaxed scrollbar-hide"
         />
@@ -277,8 +277,8 @@ export function AgentChatInput({
           <button
             onClick={handleCancel}
             className="p-2 rounded-lg transition-all duration-200 bg-red-500 text-white hover:bg-red-600 shadow-sm"
-            title="Stop generating"
-            aria-label="Stop generating"
+            title="停止生成"
+            aria-label="停止生成"
           >
             <Square className="w-5 h-5" />
           </button>
@@ -293,7 +293,7 @@ export function AgentChatInput({
                 : 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
               }
             `}
-            aria-label="Send message"
+            aria-label="发送消息"
           >
             <SendHorizontal className="w-5 h-5" />
           </button>

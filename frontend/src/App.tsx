@@ -1,7 +1,7 @@
 // src/App.tsx
 import { useEffect, useState, useCallback, useRef } from 'react';
 import type { ReactElement } from 'react';
-import { BarChart3, BookOpen, Menu, LogOut, Utensils, ChevronDown } from 'lucide-react';
+import { BarChart3, BookOpen, ChefHat, Menu, LogOut, Utensils, ChevronDown } from 'lucide-react';
 import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ChatWindow, ChatInput, Sidebar, KnowledgePanel } from './components';
 import { AgentChatWindow, AgentChatInput } from './components/agent';
@@ -11,6 +11,7 @@ import RegisterPage from './pages/Register';
 import EvaluationPage from './pages/Evaluation';
 import LLMStatsPage from './pages/LLMStats';
 import DietManagementPage from './pages/diet/DietManagement';
+import RecipesPage from './pages/Recipes';
 
 /**
  * Chat view component - handles both new chat and existing conversation
@@ -123,7 +124,7 @@ function ChatView() {
               onCancel={stopGeneration}
               disabled={isLoading}
               isStreaming={isStreaming}
-              placeholder="Ask Agent to calculate, analyze, or plan..."
+              placeholder="让智能助手帮你计算、分析或规划…"
               externalValue={suggestionText}
               onExternalValueConsumed={handleSuggestionConsumed}
               token={token || undefined}
@@ -148,7 +149,7 @@ function ChatView() {
               onCancel={stopGeneration}
               disabled={isLoading}
               isStreaming={isStreaming}
-              placeholder="Ask CookHero anything about cooking..."
+              placeholder="向 CookHero 提出任何烹饪问题…"
               externalValue={suggestionText}
               onExternalValueConsumed={handleSuggestionConsumed}
             />
@@ -231,6 +232,7 @@ function MainLayout({ children }: { children: React.ReactNode }) {
   const isEvaluationView = location.pathname.includes('/evaluation');
   const isLLMStatsView = location.pathname.includes('/llm-stats');
   const isDietView = location.pathname.includes('/diet');
+  const isRecipesView = location.pathname.includes('/recipes');
   const isAnalyticsView = isEvaluationView || isLLMStatsView;
   const analyticsLabel = isEvaluationView ? '评估监控' : isLLMStatsView ? '模型统计' : '数据分析';
 
@@ -313,7 +315,7 @@ function MainLayout({ children }: { children: React.ReactNode }) {
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="p-2 -ml-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-              title={isSidebarOpen ? 'Hide sidebar' : 'Show sidebar'}
+              title={isSidebarOpen ? '隐藏侧边栏' : '显示侧边栏'}
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -323,7 +325,7 @@ function MainLayout({ children }: { children: React.ReactNode }) {
             </div> */}
           </div>
           <div className="flex items-center gap-1.5 sm:gap-3 text-xs text-gray-600 dark:text-gray-300 overflow-visible">
-            {!isKnowledgeView && !isEvaluationView && !isLLMStatsView && !isDietView && conversationId && (
+            {!isKnowledgeView && !isEvaluationView && !isLLMStatsView && !isDietView && !isRecipesView && conversationId && (
               <span className="hidden sm:inline font-mono bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded truncate" title={conversationId}>
                 ID: {conversationId}
               </span>
@@ -349,6 +351,28 @@ function MainLayout({ children }: { children: React.ReactNode }) {
             >
               <Utensils className="w-4 h-4" />
               <span className="hidden sm:inline">{isDietView ? '返回对话' : '饮食管理'}</span>
+            </button>
+            <button
+              onClick={() => {
+                if (isRecipesView) {
+                  const basePath = isAgentMode ? '/agent' : '/chat';
+                  if (conversationId && !conversationId.startsWith('temp-')) {
+                    navigate(`${basePath}/${conversationId}`);
+                  } else {
+                    navigate(basePath);
+                  }
+                } else {
+                  navigate('/recipes');
+                }
+              }}
+              className={`flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full border transition-colors shrink-0 ${
+                isRecipesView
+                  ? 'border-orange-400 bg-orange-50 text-orange-700 dark:bg-orange-900/30 dark:text-orange-200 dark:border-orange-600'
+                  : 'border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              <ChefHat className="w-4 h-4" />
+              <span className="hidden sm:inline">{isRecipesView ? '返回对话' : '菜谱浏览'}</span>
             </button>
             <button
               onClick={() => {
@@ -437,10 +461,10 @@ function MainLayout({ children }: { children: React.ReactNode }) {
                 <button
                   onClick={handleLogout}
                   className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-100 flex items-center gap-1"
-                  title="Log out"
+                  title="退出登录"
                 >
                   <LogOut className="w-4 h-4" />
-                  <span className="hidden md:inline">Logout</span>
+                  <span className="hidden md:inline">退出登录</span>
                 </button>
               </div>
             )}
@@ -598,6 +622,16 @@ function App() {
           <RequireAuth>
             <MainLayout>
               <ChatView />
+            </MainLayout>
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/recipes"
+        element={
+          <RequireAuth>
+            <MainLayout>
+              <RecipesPage />
             </MainLayout>
           </RequireAuth>
         }

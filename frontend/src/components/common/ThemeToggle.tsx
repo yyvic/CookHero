@@ -16,8 +16,8 @@ export function ThemeToggle({ isDark, toggleTheme, className = '' }: ThemeToggle
     <button
       onClick={toggleTheme}
       className={`p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ${className}`}
-      title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-      aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      title={isDark ? '切换到浅色模式' : '切换到深色模式'}
+      aria-label={isDark ? '切换到浅色模式' : '切换到深色模式'}
     >
       {isDark ? (
         <Sun className="w-5 h-5 text-yellow-400" />

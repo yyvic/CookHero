@@ -8,6 +8,7 @@ export * from './auth';
 export * from './user';
 export * from './conversation';
 export * from './knowledge';
+export * from './recipes';
 export * from './evaluation';
 export * from './agent';
 

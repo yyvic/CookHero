@@ -137,7 +137,7 @@ export function Sidebar({
     const handleRenameClick = (e: React.MouseEvent, conv: ConversationSummary) => {
         e.stopPropagation();
         setEditingId(conv.id);
-        setEditingTitle(conv.title || conv.last_message_preview || 'New Conversation');
+        setEditingTitle(conv.title || conv.last_message_preview || '新对话');
         setMenuOpenId(null);
     };
 
@@ -198,7 +198,7 @@ export function Sidebar({
                     }
         `}
                 role="navigation"
-                aria-label="Sidebar"
+                aria-label="侧边栏"
             >
                 {/* Header */}
                 <SidebarHeader 
@@ -212,7 +212,7 @@ export function Sidebar({
                 <div className="flex-1 overflow-y-auto px-3 py-3 space-y-1">
                     <div className="flex items-center justify-between px-2 mb-2">
                         <p className="text-xs text-gray-400 dark:text-gray-500 font-medium uppercase tracking-wider">
-                            {isAgentMode ? 'Recent Agent Sessions' : 'Recent Chats'}
+                            {isAgentMode ? '最近的助手会话' : '最近的对话'}
                         </p>
                         {totalConversations > 0 && (
                             <span className="text-xs text-gray-400 dark:text-gray-500 bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded-full">
@@ -259,17 +259,15 @@ export function Sidebar({
                             onClick={onLoadMoreConversations}
                             className="w-full flex items-center justify-center gap-2 px-3 py-2 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                         >
-                            <ChevronDown className="w-4 h-4" />
-                            Load more
-                        </button>
+                            <ChevronDown className="w-4 h-4" />加载更多</button>
                     )}
 
                     {/* Empty State */}
                     {conversations.length === 0 && (
                         <div className="text-center text-gray-400 dark:text-gray-500 text-sm py-12">
                             <MessageSquare className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                            <p>No conversations yet</p>
-                            <p className="text-xs mt-1">Start a new chat to begin!</p>
+                            <p>暂无对话记录</p>
+                            <p className="text-xs mt-1">发起新对话开始使用！</p>
                         </div>
                     )}
                 </div>
@@ -309,7 +307,7 @@ function SidebarHeader({
                     <div className="w-8 h-8 flex items-center justify-center">
                         <img
                             src="/logo.png"
-                            alt="CookHero Logo"
+                            alt="CookHero 图标"
                             className="w-full h-full object-contain"
                         />
                     </div>
@@ -320,17 +318,17 @@ function SidebarHeader({
                             onClick={onToggleAgentMode}
                             className={`ml-2 flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border transition-colors bg-orange-100 text-orange-600 border-orange-200 dark:bg-orange-900/30 dark:text-orange-400 dark:border-orange-800 hover:bg-orange-200 dark:hover:bg-orange-800
                             `}
-                            title={isAgentMode ? "Switch to standard chat" : "Switch to Agent mode"}
+                            title={isAgentMode ? "切换到普通对话" : "切换到智能助手模式"}
                         >
                             {isAgentMode ? <Bot className="w-3 h-3" /> : <MessageSquare className="w-3 h-3" />}
-                            {isAgentMode ? 'Agent Mode' : '\u00A0Chat Mode'}
+                            {isAgentMode ? '助手模式' : '\u00A0对话模式'}
                         </button>
                     )}
                 </div>
                 <button
                     onClick={toggleSidebar}
                     className="md:hidden p-2 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition-colors"
-                    aria-label="Close sidebar"
+                    aria-label="关闭侧边栏"
                 >
                     <PanelLeftClose className="w-5 h-5" />
                 </button>
@@ -341,7 +339,7 @@ function SidebarHeader({
                 `}
             >
                 <Plus className="w-4 h-4" />
-                {isAgentMode ? 'New Agent Session' : 'New Chat Session'}
+                {isAgentMode ? '新建助手会话' : '新建对话'}
             </button>
         </div>
     );
@@ -373,11 +371,9 @@ function SidebarFooter({
                     </div>
                     <div className="text-left">
                         <div className="font-medium text-gray-900 dark:text-white text-sm">
-                            {username || 'User'}
+                            {username || '未命名用户'}
                         </div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">
-                            View & edit profile
-                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">查看并编辑资料</div>
                     </div>
                 </button>
                 <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
@@ -430,7 +426,7 @@ function ConversationItem({
 }) {
     const [isComposing, setIsComposing] = useState(false);
     const displayTitle =
-        conversation.title || conversation.last_message_preview || 'New Conversation';
+        conversation.title || conversation.last_message_preview || '新对话';
 
     if (isEditing) {
         return (
@@ -452,14 +448,14 @@ function ConversationItem({
                 <button
                     onClick={onRenameSave}
                     className="p-1 text-green-600 hover:text-green-700 dark:text-green-500 dark:hover:text-green-400"
-                    aria-label="Save"
+                    aria-label="保存"
                 >
                     <Check className="w-4 h-4" />
                 </button>
                 <button
                     onClick={onRenameCancel}
                     className="p-1 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
-                    aria-label="Cancel"
+                    aria-label="取消"
                 >
                     <X className="w-4 h-4" />
                 </button>
@@ -500,22 +496,16 @@ function ConversationItem({
                 >
                     {deleteConfirm ? (
                         <div className="px-3 py-2">
-                            <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-                                Delete this chat?
-                            </p>
+                            <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">删除这条对话？</p>
                             <div className="flex gap-2">
                                 <button
                                     onClick={onDeleteConfirm}
                                     className="flex-1 px-2 py-1 text-xs bg-red-500 hover:bg-red-600 text-white rounded transition-colors"
-                                >
-                                    Delete
-                                </button>
+                                >删除</button>
                                 <button
                                     onClick={onDeleteCancel}
                                     className="flex-1 px-2 py-1 text-xs bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded transition-colors"
-                                >
-                                    Cancel
-                                </button>
+                                >取消</button>
                             </div>
                         </div>
                     ) : (
@@ -524,16 +514,12 @@ function ConversationItem({
                                 onClick={onRenameClick}
                                 className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
-                                <Pencil className="w-4 h-4" />
-                                Rename
-                            </button>
+                                <Pencil className="w-4 h-4" />重命名</button>
                             <button
                                 onClick={onDeleteClick}
                                 className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
-                                <Trash2 className="w-4 h-4" />
-                                Delete
-                            </button>
+                                <Trash2 className="w-4 h-4" />删除</button>
                         </>
                     )}
                 </div>

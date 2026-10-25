@@ -49,7 +49,7 @@ const saveStreamingCache = (cache: Map<string, StreamingState>) => {
     ]);
     localStorage.setItem(STORAGE_KEYS.STREAMING_CACHE, JSON.stringify(data));
   } catch (e) {
-    console.warn('Failed to save streaming cache to localStorage:', e);
+    console.warn('保存流式缓存到本地存储失败：', e);
   }
 };
 
@@ -73,7 +73,7 @@ const loadStreamingCache = (): Map<string, StreamingState> => {
       ])
     );
   } catch (e) {
-    console.warn('Failed to load streaming cache from localStorage:', e);
+    console.warn('从本地存储读取流式缓存失败：', e);
     return new Map();
   }
 };
@@ -88,7 +88,7 @@ const clearStreamingCache = (conversationId?: string) => {
       localStorage.removeItem(STORAGE_KEYS.STREAMING_CACHE);
     }
   } catch (e) {
-    console.warn('Failed to clear streaming cache:', e);
+    console.warn('清空流式缓存失败：', e);
   }
 };
 
@@ -213,7 +213,7 @@ export function useAgent(token?: string) {
         setTotalSessions(response.total_count);
         setHasMoreSessions(nextOffset + response.sessions.length < response.total_count);
       } catch (err) {
-        console.error('Failed to list agent sessions:', err);
+        console.error('获取助手会话列表失败：', err);
       }
     },
     [sessionOffset, token]
@@ -237,7 +237,7 @@ export function useAgent(token?: string) {
       setTotalSessions(response.total_count);
       setHasMoreSessions(response.sessions.length < response.total_count);
     } catch (err) {
-      console.error('Failed to list agent sessions:', err);
+      console.error('获取助手会话列表失败：', err);
     }
   }, [token]);
 
@@ -307,7 +307,7 @@ export function useAgent(token?: string) {
     if (!content.trim() && (!images || images.length === 0)) return;
     if (isLoading) return;
     if (!token) {
-      setError('Please log in to start chatting.');
+      setError('请先登录后再开始对话。');
       return;
     }
 
@@ -451,8 +451,8 @@ export function useAgent(token?: string) {
             break;
 
            case 'error':
-             console.error('Agent error:', event.error);
-             setError(event.error || 'An error occurred');
+             console.error('助手出错：', event.error);
+             setError(event.error || '发生错误');
              // Stop streaming on error
              updateStreamingState(
                msgs => msgs.map(msg =>
@@ -545,9 +545,9 @@ export function useAgent(token?: string) {
       if (err instanceof Error && err.name === 'AbortError') {
         // Handle abort - user stopped generation
       } else {
-        console.error('Failed to send agent message:', err);
+        console.error('发送消息失败：', err);
         if (currentSessionIdRef.current === streamingSessionId) {
-          setError(err instanceof Error ? err.message : 'Failed to send message');
+          setError(err instanceof Error ? err.message : '发送消息失败');
           setMessages(prev => prev.filter(msg => msg.id !== assistantMessageId));
         }
         // Stop streaming on error
@@ -611,7 +611,7 @@ export function useAgent(token?: string) {
     if (id.startsWith('temp-')) {
       setSessionId(undefined);
       setMessages([]);
-      setError('This conversation has not been saved yet.');
+      setError('该会话尚未保存。');
       return;
     }
 
@@ -627,8 +627,8 @@ export function useAgent(token?: string) {
       setSessionId(history.session_id);
       setMessages(mapHistoryToMessages(history.messages));
     } catch (err) {
-      console.error('Failed to load agent session:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load session');
+      console.error('加载助手会话失败：', err);
+      setError(err instanceof Error ? err.message : '加载会话失败');
     } finally {
       setIsLoading(false);
     }
@@ -677,8 +677,8 @@ export function useAgent(token?: string) {
       }
       return true;
     } catch (err) {
-      console.error('Failed to delete session:', err);
-      setError(err instanceof Error ? err.message : 'Failed to delete session');
+      console.error('删除会话失败：', err);
+      setError(err instanceof Error ? err.message : '删除会话失败');
       return false;
     }
   }, [sessionId, token, initialLoadSessions]);
@@ -694,8 +694,8 @@ export function useAgent(token?: string) {
       );
       return true;
     } catch (err) {
-      console.error('Failed to rename session:', err);
-      setError(err instanceof Error ? err.message : 'Failed to rename session');
+      console.error('重命名会话失败：', err);
+      setError(err instanceof Error ? err.message : '重命名会话失败');
       return false;
     }
   }, [token]);

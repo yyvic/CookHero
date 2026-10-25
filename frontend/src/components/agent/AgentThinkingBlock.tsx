@@ -35,7 +35,7 @@ export function AgentThinkingBlock({
   isThinking,
   thinkingDuration,
   hasError = false,
-  title = 'Thinking Process',
+  title = '思考过程',
   subtitle,
 }: AgentThinkingBlockProps) {
   const [isOpen, setIsOpen] = useState(true);
@@ -128,18 +128,18 @@ export function AgentThinkingBlock({
               ))
             ) : null}
 
-            {/* Show "Thinking completed" when thinking is done, regardless of whether tool calls were made */}
+            {/* Show "思考完成" when thinking is done, regardless of whether tool calls were made */}
             {!isThinking && (
               <div className="flex items-center justify-between text-green-600 dark:text-green-400">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4" />
-                  <span className="text-sm">Thinking completed</span>
+                  <span className="text-sm">思考完成</span>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
                   className="inline-flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
-                  aria-label="Collapse thinking details"
+                  aria-label="收起思考详情"
                 >
                   <ChevronUp className="w-3.5 h-3.5" />
                 </button>
@@ -168,7 +168,7 @@ function TraceStepItem({ step }: { step: TraceStep }) {
         icon: <AlertCircle className="w-4 h-4 text-red-500" />,
         bgColor: 'bg-red-50 dark:bg-red-900/30',
         borderColor: 'border-red-200 dark:border-red-800',
-        label: 'Error',
+        label: '错误',
       };
     }
     if (step.action === 'tool_call') {
@@ -176,7 +176,7 @@ function TraceStepItem({ step }: { step: TraceStep }) {
         icon: <Play className="w-4 h-4 text-amber-500" />,
         bgColor: 'bg-amber-50 dark:bg-amber-900/30',
         borderColor: 'border-amber-200 dark:border-amber-800',
-        label: 'Tool Call',
+        label: '工具调用',
       };
     }
     if (step.action === 'tool_result') {
@@ -184,7 +184,7 @@ function TraceStepItem({ step }: { step: TraceStep }) {
         icon: <ArrowRight className="w-4 h-4 text-blue-500" />,
         bgColor: 'bg-blue-50 dark:bg-blue-900/30',
         borderColor: 'border-blue-200 dark:border-blue-800',
-        label: 'Result',
+        label: '结果',
       };
     }
     if (step.action === 'subagent_output') {
@@ -192,7 +192,7 @@ function TraceStepItem({ step }: { step: TraceStep }) {
         icon: <CheckCircle2 className="w-4 h-4 text-emerald-500" />,
         bgColor: 'bg-emerald-50 dark:bg-emerald-900/30',
         borderColor: 'border-emerald-200 dark:border-emerald-800',
-        label: 'Output',
+        label: '输出',
       };
     }
     if (step.action === 'final_answer') {
@@ -200,7 +200,7 @@ function TraceStepItem({ step }: { step: TraceStep }) {
         icon: <CheckCircle2 className="w-4 h-4 text-green-500" />,
         bgColor: 'bg-green-50 dark:bg-green-900/30',
         borderColor: 'border-green-200 dark:border-green-800',
-        label: 'Complete',
+        label: '完成',
       };
     }
     return {

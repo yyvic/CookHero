@@ -271,7 +271,7 @@ function UsageChart({ data, loading }: UsageChartProps) {
           yAxisId="right"
           type="monotone"
           dataKey="tokens"
-          name="Tokens"
+          name="Token 数量"
           stroke="#3b82f6"
           strokeWidth={2}
           fill="url(#colorTokens)"
@@ -340,7 +340,7 @@ function DistributionChart({ data, loading, activeIndex, onActiveChange }: Distr
       </ResponsiveContainer>
       
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none z-10">
-        <p className="text-xs text-gray-500 font-medium uppercase">Total</p>
+        <p className="text-xs text-gray-500 font-medium uppercase">共计</p>
         <p className="text-lg font-bold text-gray-900 dark:text-white">
           {(data.reduce((acc, curr) => acc + curr.value, 0) / 1000).toFixed(1)}k
         </p>
@@ -427,7 +427,7 @@ export default function LLMStatsPage() {
       setAvailableModules(modulesData.modules);
       setAvailableModels(modelsData.models);
     } catch (err) {
-      console.error('Failed to load LLM stats:', err);
+      console.error('加载模型统计失败：', err);
       setError(err instanceof Error ? err.message : '加载数据失败');
     } finally {
       setLoading(false);
@@ -443,7 +443,7 @@ export default function LLMStatsPage() {
       const tsData = await getLLMStatsTimeSeries(token, days, granularity);
       setTimeSeries(tsData);
     } catch (err) {
-      console.error('Failed to load time series:', err);
+      console.error('加载时间序列失败：', err);
     } finally {
       setTsLoading(false);
     }
@@ -460,7 +460,7 @@ export default function LLMStatsPage() {
       setModuleDist(modDistData);
       setModelDist(modelDistData);
     } catch (err) {
-      console.error('Failed to reload distribution:', err);
+      console.error('重新加载分布数据失败：', err);
     }
   }, [token, customStart, customEnd]);
 
@@ -481,7 +481,7 @@ export default function LLMStatsPage() {
       ]);
       setToolDist(toolDistData);
     } catch (err) {
-      console.error('Failed to load tool stats:', err);
+      console.error('加载工具统计失败：', err);
     } finally {
       setToolLoading(false);
     }
@@ -542,9 +542,7 @@ export default function LLMStatsPage() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-orange-500 font-semibold">
-              Analytics
-            </p>
+            <p className="text-xs uppercase tracking-[0.2em] text-orange-500 font-semibold">数据分析</p>
             <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2">
               <Activity className="w-5 h-5 md:w-6 md:h-6 text-orange-500" />
               LLM 使用统计
@@ -711,7 +709,7 @@ export default function LLMStatsPage() {
                     value={customStart}
                     onChange={(e) => setCustomStart(e.target.value)}
                  />
-                 <span className="text-gray-500">to</span>
+                 <span className="text-gray-500">至</span>
                  <input 
                     type="datetime-local" 
                     className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"

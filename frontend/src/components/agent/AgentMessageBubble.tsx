@@ -103,7 +103,7 @@ function getSourceStyle(type: string): { icon: typeof BookOpen; accent: string; 
     return {
       icon: Globe,
       accent: 'text-blue-500 dark:text-blue-400',
-      label: 'Web Search',
+      label: '联网搜索',
     };
   }
   return {
@@ -186,7 +186,7 @@ function buildSourcesFromTrace(trace: TraceStep[], fallbackSources?: Source[]) {
       const results = Array.isArray(payload.results) ? payload.results : [];
       results.forEach((result) => {
         if (!result || typeof result !== 'object') return;
-        const info = result.title || result.content || result.url || 'Web result';
+        const info = result.title || result.content || result.url || '联网结果';
         addSource(
           {
             type: 'web',
@@ -243,7 +243,7 @@ export function AgentMessageBubble({ message, hasError = false }: AgentMessageBu
   const subagentLabel = subagentNames.length === 1
     ? subagentNames[0]
     : subagentNames.length > 1
-      ? `${subagentNames.length} subagents`
+      ? `${subagentNames.length} 个子助手`
       : undefined;
 
   // Extract images from trace for user messages
@@ -330,7 +330,7 @@ export function AgentMessageBubble({ message, hasError = false }: AgentMessageBu
             <AgentThinkingBlock
               trace={subagentTrace}
               isThinking={isSubagentThinking}
-              title="Subagent Thinking"
+              title="子助手思考过程"
               subtitle={subagentLabel}
             />
           </div>
@@ -352,7 +352,7 @@ export function AgentMessageBubble({ message, hasError = false }: AgentMessageBu
                   <img
                     key={idx}
                     src={imgUrl}
-                    alt={`Uploaded image ${idx + 1}`}
+                    alt={`已上传图片 ${idx + 1}`}
                     className="max-w-[200px] max-h-[200px] rounded-lg object-cover"
                   />
                 ))}

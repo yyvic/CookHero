@@ -28,7 +28,7 @@ function LoginPage() {
       await login({ username: username.trim(), password });
       navigate(from, { replace: true });
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Unable to log in';
+      const msg = err instanceof Error ? err.message : '无法登录';
       // If multiple lines, split into array for display
       setError(msg.includes('\n') ? msg.split('\n').map(s => s.trim()).filter(Boolean) : msg);
     } finally {
@@ -41,13 +41,13 @@ function LoginPage() {
       <div className="w-full max-w-md bg-white dark:bg-gray-900 shadow-xl rounded-2xl p-8 border border-orange-100/70 dark:border-gray-800">
         <div className="flex items-center gap-2 mb-6">
           <span className="text-3xl">🍳</span>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Welcome back to CookHero</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">欢迎回到 CookHero</h1>
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">Sign in to continue your cooking conversations.</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">登录后继续你的烹饪对话</p>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Username</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">用户名</label>
             <input
               type="text"
               value={username}
@@ -58,7 +58,7 @@ function LoginPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Password</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">密码</label>
             <input
               type="password"
               value={password}
@@ -86,15 +86,13 @@ function LoginPage() {
             disabled={isLoading}
             className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-70 text-white font-semibold py-2 rounded-lg transition-colors"
           >
-            {isLoading ? 'Signing in...' : 'Sign in'}
+            {isLoading ? '登录中…' : '登录'}
           </button>
         </form>
 
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-4 text-center">
           New here?{' '}
-          <Link to="/register" className="text-orange-600 hover:text-orange-700 font-semibold">
-            Create an account
-          </Link>
+          <Link to="/register" className="text-orange-600 hover:text-orange-700 font-semibold">还没有账号？注册一个</Link>
         </p>
       </div>
     </div>

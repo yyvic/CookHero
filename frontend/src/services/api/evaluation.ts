@@ -33,7 +33,7 @@ export async function getEvaluationStatistics(
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch evaluation statistics: ${response.status}`);
+    throw new Error(`获取评估统计失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -57,7 +57,7 @@ export async function getEvaluationTrends(
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch evaluation trends: ${response.status}`);
+    throw new Error(`获取评估趋势失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -79,7 +79,7 @@ export async function getEvaluationAlerts(
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch evaluation alerts: ${response.status}`);
+    throw new Error(`获取评估告警失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -94,7 +94,7 @@ export async function getEvaluationHealth(token: string): Promise<EvaluationHeal
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch evaluation health: ${response.status}`);
+    throw new Error(`获取评估健康状态失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -112,7 +112,7 @@ export async function getEvaluationById(
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch evaluation: ${response.status}`);
+    throw new Error(`获取评估详情失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -138,7 +138,7 @@ export async function getConversationEvaluations(
   );
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch conversation evaluations: ${response.status}`);
+    throw new Error(`获取对话评估失败，状态码：${response.status}`);
   }
 
   return response.json();

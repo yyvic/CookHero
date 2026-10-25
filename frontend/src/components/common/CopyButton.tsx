@@ -21,7 +21,7 @@ export function CopyButton({ content, className = '', size = 'sm' }: CopyButtonP
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy to clipboard:', err);
+      console.error('复制到剪贴板失败：', err);
     }
   }, [content]);
 
@@ -41,7 +41,7 @@ export function CopyButton({ content, className = '', size = 'sm' }: CopyButtonP
         ${className}
       `}
       title={copied ? '已复制' : '复制'}
-      aria-label={copied ? 'Copied' : 'Copy to clipboard'}
+      aria-label={copied ? '已复制' : '复制到剪贴板'}
     >
       {copied ? (
         <Check className={iconSize} />

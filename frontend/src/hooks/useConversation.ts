@@ -53,7 +53,7 @@ const saveStreamingCache = (cache: Map<string, StreamingState>) => {
     ]);
     localStorage.setItem(STORAGE_KEYS.STREAMING_CACHE, JSON.stringify(data));
   } catch (e) {
-    console.warn('Failed to save streaming cache to localStorage:', e);
+    console.warn('保存流式缓存到本地存储失败：', e);
   }
 };
 
@@ -80,7 +80,7 @@ const loadStreamingCache = (): Map<string, StreamingState> => {
       ])
     );
   } catch (e) {
-    console.warn('Failed to load streaming cache from localStorage:', e);
+    console.warn('从本地存储读取流式缓存失败：', e);
     return new Map();
   }
 };
@@ -95,7 +95,7 @@ const clearStreamingCache = (conversationId?: string) => {
       localStorage.removeItem(STORAGE_KEYS.STREAMING_CACHE);
     }
   } catch (e) {
-    console.warn('Failed to clear streaming cache:', e);
+    console.warn('清空流式缓存失败：', e);
   }
 };
 
@@ -170,7 +170,7 @@ export function useConversation(token?: string) {
         setTotalConversations(total_count);
         setHasMoreConversations(nextOffset + list.length < total_count);
       } catch (err) {
-        console.error('Failed to list conversations:', err);
+        console.error('获取对话列表失败：', err);
       }
     },
     [conversationOffset, token]
@@ -194,7 +194,7 @@ export function useConversation(token?: string) {
       setTotalConversations(total_count);
       setHasMoreConversations(list.length < total_count);
     } catch (err) {
-      console.error('Failed to list conversations:', err);
+      console.error('获取对话列表失败：', err);
     }
   }, [token]);
 
@@ -268,7 +268,7 @@ export function useConversation(token?: string) {
   const sendMessage = useCallback(async (content: string, extraOptions?: ExtraOptions, images?: ImageData[]) => {
     if ((!content.trim() && (!images || images.length === 0)) || isLoading) return;
     if (!token) {
-      setError('Please log in to start chatting.');
+      setError('请先登录后再开始对话。');
       return;
     }
 
@@ -329,7 +329,7 @@ export function useConversation(token?: string) {
         return [
           {
             id: streamingConvId,
-            title: 'New Conversation',
+            title: '新对话',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
             message_count: 0,
@@ -563,7 +563,7 @@ export function useConversation(token?: string) {
         updateStreamingState(
           msgs => msgs.map(msg =>
             msg.id === assistantMessageId
-              ? { ...msg, isStreaming: false, content: msg.content || '(Generation stopped)' }
+              ? { ...msg, isStreaming: false, content: msg.content || '（已停止生成）' }
               : msg
           ),
           false
@@ -572,7 +572,7 @@ export function useConversation(token?: string) {
         streamingCacheRef.current.delete(streamingConvId);
         clearStreamingCache(streamingConvId);
        } else {
-         console.error('Failed to send message:', err);
+         console.error('发送消息失败：', err);
          
          // Stop streaming on error
          updateStreamingState(
@@ -586,7 +586,7 @@ export function useConversation(token?: string) {
          
          // Only show error if this conversation is currently displayed
          if (currentConversationIdRef.current === streamingConvId) {
-           setError(err instanceof Error ? err.message : 'Failed to send message');
+           setError(err instanceof Error ? err.message : '发送消息失败');
            // Remove the failed assistant message
            setMessages(prev => prev.filter(msg => msg.id !== assistantMessageId));
          }
@@ -642,7 +642,7 @@ export function useConversation(token?: string) {
       // Just clear the view - the conversation doesn't exist on server
       setConversationId(undefined);
       setMessages([]);
-      setError('This conversation has not been saved yet.');
+      setError('该会话尚未保存。');
       return;
     }
 
@@ -655,8 +655,8 @@ export function useConversation(token?: string) {
       setConversationId(history.conversation_id);
       setMessages(mapHistoryToMessages(history.messages));
     } catch (err) {
-      console.error('Failed to load conversation:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load conversation');
+      console.error('加载对话失败：', err);
+      setError(err instanceof Error ? err.message : '加载对话失败');
     } finally {
       setIsLoading(false);
     }
@@ -713,8 +713,8 @@ export function useConversation(token?: string) {
       }
       return true;
     } catch (err) {
-      console.error('Failed to delete conversation:', err);
-      setError(err instanceof Error ? err.message : 'Failed to delete conversation');
+      console.error('删除对话失败：', err);
+      setError(err instanceof Error ? err.message : '删除对话失败');
       return false;
     }
   }, [conversationId, token, initialLoadConversations]);
@@ -731,8 +731,8 @@ export function useConversation(token?: string) {
       );
       return true;
     } catch (err) {
-      console.error('Failed to rename conversation:', err);
-      setError(err instanceof Error ? err.message : 'Failed to rename conversation');
+      console.error('重命名对话失败：', err);
+      setError(err instanceof Error ? err.message : '重命名对话失败');
       return false;
     }
   }, [token]);

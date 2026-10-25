@@ -232,7 +232,7 @@ const ServerCard = memo(function ServerCard({
             hover:opacity-80
           `}
         >
-          {allSelected ? 'Deselect All' : 'Select All'}
+          {allSelected ? '取消全选' : '全选'}
         </button>
         {isExpanded ? (
           <ChevronUp className="w-4 h-4 text-gray-400" />
@@ -259,7 +259,7 @@ const ServerCard = memo(function ServerCard({
               />
             ))}
             {server.tools.length === 0 && (
-              <span className="text-xs text-gray-400">No tools available</span>
+              <span className="text-xs text-gray-400">暂无可用工具</span>
             )}
           </div>
 
@@ -332,8 +332,8 @@ export function ToolSelector({
         }
       }
     } catch (err) {
-      console.error('Failed to load tools:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load tools');
+      console.error('加载工具失败：', err);
+      setError(err instanceof Error ? err.message : '加载工具失败');
     } finally {
       setIsLoading(false);
     }
@@ -376,8 +376,8 @@ export function ToolSelector({
         onSelectionChange(mergedSelection);
       }
     } catch (err) {
-      console.error('Failed to load subagents:', err);
-      setSubagentError(err instanceof Error ? err.message : 'Failed to load subagents');
+      console.error('加载子助手失败：', err);
+      setSubagentError(err instanceof Error ? err.message : '加载子助手失败');
     } finally {
       setIsSubagentLoading(false);
     }
@@ -474,7 +474,7 @@ export function ToolSelector({
     try {
       await toggleSubagent(subagent.name, newEnabled, token);
     } catch (err) {
-      console.error('Failed to toggle subagent:', err);
+      console.error('切换子助手失败：', err);
 
       if (newEnabled) {
         onSelectionChange(selectedTools.filter(t => t !== toolName));
@@ -545,7 +545,7 @@ export function ToolSelector({
           `}
         >
           <Wrench className="w-4 h-4 text-orange-500" />
-          <span className="font-medium">Tools</span>
+          <span className="font-medium">工具</span>
           <span className="text-xs text-gray-500 dark:text-gray-400">
             ({builtinSelectedCount}/{builtinTools.length})
           </span>
@@ -617,7 +617,7 @@ export function ToolSelector({
             `}
           >
             <Bot className="w-4 h-4 text-purple-500" />
-            <span className="font-medium">Agents</span>
+            <span className="font-medium">智能助手</span>
             <span className="text-xs text-gray-500 dark:text-gray-400">
               ({subagentSelectedCount}/{subagents.length})
             </span>
@@ -637,9 +637,7 @@ export function ToolSelector({
           {isToolsExpanded && (
             <>
               {isLoading ? (
-                <div className="text-sm text-gray-500 dark:text-gray-400 text-center py-2">
-                  Loading tools...
-                </div>
+                <div className="text-sm text-gray-500 dark:text-gray-400 text-center py-2">正在加载工具…</div>
               ) : error ? (
                 <div className="text-sm text-red-500 text-center py-2">
                   {error}
@@ -658,9 +656,7 @@ export function ToolSelector({
                   />
                 ))
               ) : (
-                <div className="text-sm text-gray-500 dark:text-gray-400 text-center py-2">
-                  No built-in tools available
-                </div>
+                <div className="text-sm text-gray-500 dark:text-gray-400 text-center py-2">暂无内置工具</div>
               )}
             </>
           )}
@@ -689,9 +685,7 @@ export function ToolSelector({
               {isSubagentLoading ? (
                 <div className="flex items-center justify-center gap-2 py-2">
                   <Loader2 className="w-4 h-4 animate-spin text-purple-500" />
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    Loading agents...
-                  </span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">正在加载助手…</span>
                 </div>
               ) : subagentError ? (
                 <div className="text-sm text-red-500 text-center py-2">
@@ -723,9 +717,7 @@ export function ToolSelector({
                           {infoAgent.display_name}
                         </span>
                         {infoAgent.builtin && (
-                          <span className="text-xs px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-300 rounded">
-                            Built-in
-                          </span>
+                          <span className="text-xs px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-300 rounded">内置</span>
                         )}
                       </div>
                       <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
@@ -733,7 +725,7 @@ export function ToolSelector({
                       </p>
                       {infoAgent.tools.length > 0 && (
                         <div className="text-xs text-gray-500 dark:text-gray-500">
-                          <span className="font-medium">Tools:</span>{' '}
+                          <span className="font-medium">工具：</span>{' '}
                           {infoAgent.tools.join(', ')}
                         </div>
                       )}
@@ -741,9 +733,7 @@ export function ToolSelector({
                   )}
                 </>
               ) : (
-                <div className="text-sm text-gray-500 dark:text-gray-400 text-center py-2">
-                  No agents available
-                </div>
+                <div className="text-sm text-gray-500 dark:text-gray-400 text-center py-2">暂无可用助手</div>
               )}
             </>
           )}

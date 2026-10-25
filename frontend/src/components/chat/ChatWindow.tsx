@@ -109,7 +109,7 @@ function EmptyState({
                     <div className="w-100 h-48 max-w-5xl mx-auto flex items-center justify-center">
                         <img
                             src="/image.png"
-                            alt="CookHero Logo"
+                            alt="CookHero 图标"
                             className="w-full max-w-4xl object-contain transition-all duration-500 group-hover:scale-105"
                         />
                     </div>
@@ -120,18 +120,18 @@ function EmptyState({
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 w-full max-w-3xl mb-6 sm:mb-8">
                 <FeatureCard
                     icon={<BookOpen className="w-5 h-5" />}
-                    title="Recipe Search"
-                    description="Find detailed cooking instructions"
+                    title="菜谱搜索"
+                    description="查找详细的烹饪步骤"
                 />
                 <FeatureCard
                     icon={<Lightbulb className="w-5 h-5" />}
-                    title="Cooking Tips"
-                    description="Learn professional techniques"
+                    title="烹饪技巧"
+                    description="学习专业烹饪手法"
                 />
                 <FeatureCard
                     icon={<UtensilsCrossed className="w-5 h-5" />}
-                    title="Ingredient Match"
-                    description="Discover dishes you can make"
+                    title="食材匹配"
+                    description="发现你能做的菜"
                 />
             </div>
 
@@ -223,7 +223,7 @@ function LoadingIndicator() {
             </div>
             <div className="space-y-2 pt-2">
                 <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span className="animate-pulse">CookHero is thinking...</span>
+                    <span className="animate-pulse">CookHero 正在思考…</span>
                 </div>
             </div>
         </div>

@@ -24,7 +24,7 @@ export function AgentProvider({ children }: { children: ReactNode }) {
 export function useAgentContext(): AgentContextValue {
   const ctx = useContext(AgentContext);
   if (!ctx) {
-    throw new Error('useAgentContext must be used within AgentProvider');
+    throw new Error('useAgentContext 必须在 AgentProvider 内部使用');
   }
   return ctx;
 }

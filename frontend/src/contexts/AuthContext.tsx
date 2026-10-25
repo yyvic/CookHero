@@ -68,7 +68,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const updateProfile = useCallback(async (data: UserProfileUpdateRequest) => {
-    if (!token) throw new Error('Not authenticated');
+    if (!token) throw new Error('未登录');
     const res = await updateUserProfile(data, token);
     if (res.username) {
       setUsername(res.username);
@@ -95,7 +95,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 export function useAuth(): AuthContextValue {
   const ctx = useContext(AuthContext);
   if (!ctx) {
-    throw new Error('useAuth must be used within AuthProvider');
+    throw new Error('useAuth 必须在 AuthProvider 内部使用');
   }
   return ctx;
 }

@@ -76,7 +76,7 @@ export async function parseErrorResponse(response: Response): Promise<string> {
     // Not JSON; return raw text
     return await response.text();
   } catch (e) {
-    return String(e instanceof Error ? e.message : 'Unknown error');
+    return String(e instanceof Error ? e.message : '未知错误');
   }
 }
 
@@ -85,7 +85,7 @@ export async function parseErrorResponse(response: Response): Promise<string> {
  */
 function friendlyMessageFor(msg: string, ctx?: Record<string, unknown>): string {
   if (msg.includes('at least') && ctx && ctx.min_length) {
-    return `Must be at least ${ctx.min_length} characters`;
+    return `至少需要 ${ctx.min_length} 个字符`;
   }
   if (msg.includes('field required') || msg === 'value_error.missing') {
     return 'This field is required';
@@ -103,7 +103,7 @@ export async function apiGet<T>(endpoint: string, token?: string): Promise<T> {
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -125,7 +125,7 @@ export async function apiPost<T, D = unknown>(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -147,7 +147,7 @@ export async function apiPut<T, D = unknown>(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -164,7 +164,7 @@ export async function apiDelete<T>(endpoint: string, token?: string): Promise<T>
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();

@@ -27,11 +27,11 @@ export const INTENT_LABELS: Record<string, string> = {
 
 // Date Category Labels
 export const DATE_CATEGORY_LABELS = {
-  today: 'Today',
-  yesterday: 'Yesterday',
-  lastWeek: 'Last 7 Days',
-  lastMonth: 'Last 30 Days',
-  older: 'Older',
+  today: '今天',
+  yesterday: '昨天',
+  lastWeek: '最近 7 天',
+  lastMonth: '最近 30 天',
+  older: '更早',
 } as const;
 
 // App Info

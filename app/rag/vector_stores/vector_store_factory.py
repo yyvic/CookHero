@@ -48,7 +48,7 @@ def get_vector_store(
     Returns:
         An instance of the Milvus vector store.
     """
-    connection_args = {"host": milvus_config.host, "port": milvus_config.port}
+    connection_args = {"uri": "http://" + str(milvus_config.host) + ":" + str(milvus_config.port), "host": milvus_config.host, "port": milvus_config.port}
     if milvus_config.user:
         connection_args["user"] = milvus_config.user
     if milvus_config.password:

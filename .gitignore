@@ -37,3 +37,5 @@ CODEBUDDY.md
 logs/
 blog/
 .ignore
+# 本地汉化前的源码备份，不进仓库
+frontend/src.bak*/

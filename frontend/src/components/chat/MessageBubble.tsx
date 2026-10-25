@@ -193,7 +193,7 @@ export function MessageBubble({ message, hasError = false }: MessageBubbleProps)
                   <img
                     key={idx}
                     src={img}
-                    alt={`Uploaded image ${idx + 1}`}
+                    alt={`已上传图片 ${idx + 1}`}
                     className="max-w-[200px] max-h-[200px] rounded-lg object-cover"
                   />
                 ))}

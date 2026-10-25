@@ -20,7 +20,7 @@ function RegisterPage() {
       return;
     }
     if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+      setError('两次输入的密码不一致。');
       return;
     }
 
@@ -30,7 +30,7 @@ function RegisterPage() {
       await register({ username: username.trim(), password });
       navigate('/agent', { replace: true });
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Unable to register';
+      const msg = err instanceof Error ? err.message : '注册失败';
       setError(msg.includes('\n') ? msg.split('\n').map(s => s.trim()).filter(Boolean) : msg);
     } finally {
       setIsLoading(false);
@@ -42,13 +42,13 @@ function RegisterPage() {
       <div className="w-full max-w-md bg-white dark:bg-gray-900 shadow-xl rounded-2xl p-8 border border-orange-100/70 dark:border-gray-800">
         <div className="flex items-center gap-2 mb-6">
           <span className="text-3xl">🧑‍🍳</span>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Join CookHero</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">加入 CookHero</h1>
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">Create an account to start new cooking chats.</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">创建账号，开启烹饪对话之旅</p>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Username</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">用户名</label>
             <input
               type="text"
               value={username}
@@ -59,7 +59,7 @@ function RegisterPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Password</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">密码</label>
             <input
               type="password"
               value={password}
@@ -70,7 +70,7 @@ function RegisterPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Confirm Password</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">确认密码</label>
             <input
               type="password"
               value={confirmPassword}
@@ -98,15 +98,13 @@ function RegisterPage() {
             disabled={isLoading}
             className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-70 text-white font-semibold py-2 rounded-lg transition-colors"
           >
-            {isLoading ? 'Creating account...' : 'Create account'}
+            {isLoading ? '正在创建账号…' : '创建账号'}
           </button>
         </form>
 
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-4 text-center">
           Already have an account?{' '}
-          <Link to="/login" className="text-orange-600 hover:text-orange-700 font-semibold">
-            Sign in
-          </Link>
+          <Link to="/login" className="text-orange-600 hover:text-orange-700 font-semibold">登录</Link>
         </p>
       </div>
     </div>

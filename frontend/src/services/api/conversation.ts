@@ -31,12 +31,12 @@ export async function* streamConversation(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   const reader = response.body?.getReader();
   if (!reader) {
-    throw new Error('No response body');
+    throw new Error('响应内容为空');
   }
 
   const decoder = new TextDecoder();
@@ -61,7 +61,7 @@ export async function* streamConversation(
                 const data = JSON.parse(line.slice(6));
                 yield data as SSEEvent;
               } catch (e) {
-                console.warn('Failed to parse final SSE event:', line);
+                console.warn('解析结束事件失败：', line);
               }
             }
           }
@@ -81,7 +81,7 @@ export async function* streamConversation(
             const data = JSON.parse(line.slice(6));
             yield data as SSEEvent;
           } catch (e) {
-            console.warn('Failed to parse SSE event:', line);
+            console.warn('解析流式事件失败：', line);
           }
         }
       }
@@ -111,7 +111,7 @@ export async function getConversationHistory(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -136,7 +136,7 @@ export async function listConversations(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -156,7 +156,7 @@ export async function deleteConversation(
   
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
   
   return response.json();
@@ -178,7 +178,7 @@ export async function updateConversationTitle(
   
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
   
   return response.json();

@@ -34,7 +34,7 @@ export function ConversationProvider({ children }: { children: ReactNode }) {
 export function useConversationContext(): ConversationContextValue {
   const ctx = useContext(ConversationContext);
   if (!ctx) {
-    throw new Error('useConversationContext must be used within ConversationProvider');
+    throw new Error('useConversationContext 必须在 ConversationProvider 内部使用');
   }
   return ctx;
 }

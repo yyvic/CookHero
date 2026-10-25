@@ -552,7 +552,7 @@ export default function EvaluationPage() {
       setAlerts(alertsData);
       setHealth(healthData);
     } catch (err) {
-      console.error('Failed to load evaluation data:', err);
+      console.error('加载评估数据失败：', err);
       setError(err instanceof Error ? err.message : '加载数据失败');
     } finally {
       setLoading(false);
@@ -568,7 +568,7 @@ export default function EvaluationPage() {
       const trendsData = await getEvaluationTrends(token, days, granularity);
       setTrends(trendsData);
     } catch (err) {
-      console.error('Failed to load trends:', err);
+      console.error('加载趋势数据失败：', err);
     } finally {
       setTrendsLoading(false);
     }
@@ -613,9 +613,7 @@ export default function EvaluationPage() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-orange-500 font-semibold">
-              Analytics
-            </p>
+            <p className="text-xs uppercase tracking-[0.2em] text-orange-500 font-semibold">数据分析</p>
             <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2">
               <BarChart3 className="w-5 h-5 md:w-6 md:h-6 text-orange-500" />
               RAG 评估监控

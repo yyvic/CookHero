@@ -295,7 +295,7 @@ function LogCard({ logs, mealType, date, onAddLog, onEditLog, onDeleteLog }: Log
                         <div key={idx} className="truncate">
                           {item.food_name}
                           {item.calories && (
-                            <span className="text-xs text-gray-500 ml-1">({item.calories}kcal)</span>
+                            <span className="text-xs text-gray-500 ml-1">({item.calories}千卡)</span>
                           )}
                         </div>
                       ))
@@ -387,7 +387,7 @@ function MealModal({ isOpen, onClose, onSave, initialData, mealType, date }: Mea
       await onSave({ dishes: validDishes, notes: notes || undefined });
       onClose();
     } catch (error) {
-      console.error('Failed to save meal:', error);
+      console.error('保存餐食失败：', error);
     } finally {
       setIsSaving(false);
     }
@@ -434,7 +434,7 @@ function MealModal({ isOpen, onClose, onSave, initialData, mealType, date }: Mea
                   newDishes[idx].calories = e.target.value ? parseInt(e.target.value) : undefined;
                   setDishes(newDishes);
                 }}
-                placeholder="kcal"
+                placeholder="千卡"
                 className="w-20 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500"
               />
               {dishes.length > 1 && (
@@ -562,7 +562,7 @@ function QuickLogModal({ isOpen, onClose, onSave, date, initialMealType }: Quick
       setImages([]);
       onClose();
     } catch (error) {
-      console.error('Failed to log meal:', error);
+      console.error('记录餐食失败：', error);
     } finally {
       setIsSaving(false);
     }
@@ -709,7 +709,7 @@ function EditLogModal({ isOpen, log, onClose, onSave }: EditLogModalProps) {
       await onSave({ items: validItems, notes: notes || undefined });
       onClose();
     } catch (error) {
-      console.error('Failed to update log:', error);
+      console.error('更新记录失败：', error);
     } finally {
       setIsSaving(false);
     }
@@ -756,7 +756,7 @@ function EditLogModal({ isOpen, log, onClose, onSave }: EditLogModalProps) {
                     next[idx].calories = e.target.value ? Number(e.target.value) : undefined;
                     setItems(next);
                   }}
-                  placeholder="kcal"
+                  placeholder="千卡"
                   className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-emerald-500"
                 />
                 <input
@@ -885,10 +885,10 @@ function SummaryPanel({ summary, isLoading }: SummaryPanelProps) {
         </div>
         <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
           {totalCalories !== null ? totalCalories.toLocaleString() : '-'}
-          <span className="text-sm font-normal text-gray-500 ml-1">kcal</span>
+          <span className="text-sm font-normal text-gray-500 ml-1">千卡</span>
         </div>
         <div className="text-xs text-gray-500 mt-1">
-          {formatAverageLine(avgCalories, 'kcal')}
+          {formatAverageLine(avgCalories, '千卡')}
         </div>
       </div>
 
@@ -1305,7 +1305,7 @@ export default function DietManagementPage() {
                   <div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-amber-50/60 dark:bg-amber-900/10 p-4">
                     <div className="text-xs text-amber-700 dark:text-amber-200">{formatDateShort(date)} · 计划目标</div>
                     <div className="mt-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
-                      {planTotals.calories ? `${planTotals.calories.toFixed(0)} kcal` : '未设置'}
+                      {planTotals.calories ? `${planTotals.calories.toFixed(0)} 千卡` : '未设置'}
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
                       蛋白 {planTotals.protein.toFixed(1)}g · 脂肪 {planTotals.fat.toFixed(1)}g · 碳水 {planTotals.carbs.toFixed(1)}g
@@ -1318,7 +1318,7 @@ export default function DietManagementPage() {
                   <div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-4">
                     <div className="text-xs text-gray-500">实际摄入</div>
                     <div className="mt-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
-                      {actualTotals.calories ? `${actualTotals.calories.toFixed(0)} kcal` : '暂无记录'}
+                      {actualTotals.calories ? `${actualTotals.calories.toFixed(0)} 千卡` : '暂无记录'}
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
                       蛋白 {actualTotals.protein.toFixed(1)}g · 脂肪 {actualTotals.fat.toFixed(1)}g · 碳水 {actualTotals.carbs.toFixed(1)}g

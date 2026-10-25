@@ -28,7 +28,7 @@ export async function getAvailableTools(token?: string): Promise<ToolsListRespon
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -44,7 +44,7 @@ export async function listMcpServers(token?: string): Promise<MCPServerListRespo
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -70,7 +70,7 @@ export async function createMcpServer(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -92,7 +92,7 @@ export async function updateMcpServer(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -112,7 +112,7 @@ export async function deleteMcpServer(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -138,12 +138,12 @@ export async function* streamAgentChat(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   const reader = response.body?.getReader();
   if (!reader) {
-    throw new Error('No response body');
+    throw new Error('响应内容为空');
   }
 
   const decoder = new TextDecoder();
@@ -164,7 +164,7 @@ export async function* streamAgentChat(
                 const data = JSON.parse(line.slice(6));
                 yield data as SSEEvent;
               } catch (e) {
-                console.warn('Failed to parse final SSE event:', line);
+                console.warn('解析结束事件失败：', line);
               }
             }
           }
@@ -182,7 +182,7 @@ export async function* streamAgentChat(
             const data = JSON.parse(line.slice(6));
             yield data as SSEEvent;
           } catch (e) {
-            console.warn('Failed to parse SSE event:', line);
+            console.warn('解析流式事件失败：', line);
           }
         }
       }
@@ -212,7 +212,7 @@ export async function agentChat(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -239,7 +239,7 @@ export async function listAgentSessions(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -258,7 +258,7 @@ export async function getAgentSessionHistory(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -278,7 +278,7 @@ export async function deleteAgentSession(
   
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
   
   return response.json();
@@ -297,7 +297,7 @@ export async function getAgentSession(
 
     if (!response.ok) {
         const msg = await parseErrorResponse(response);
-        throw new Error(msg || `HTTP error! status: ${response.status}`);
+        throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
     }
 
     return response.json();
@@ -319,7 +319,7 @@ export async function updateAgentSessionTitle(
 
     if (!response.ok) {
         const msg = await parseErrorResponse(response);
-        throw new Error(msg || `HTTP error! status: ${response.status}`);
+        throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
     }
 
     return response.json();
@@ -337,7 +337,7 @@ export async function listSubagents(token?: string): Promise<SubagentListRespons
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -361,7 +361,7 @@ export async function toggleSubagent(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -382,7 +382,7 @@ export async function createSubagent(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -404,7 +404,7 @@ export async function updateSubagent(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();
@@ -424,7 +424,7 @@ export async function deleteSubagent(
 
   if (!response.ok) {
     const msg = await parseErrorResponse(response);
-    throw new Error(msg || `HTTP error! status: ${response.status}`);
+    throw new Error(msg || `HTTP 请求失败，状态码：${response.status}`);
   }
 
   return response.json();

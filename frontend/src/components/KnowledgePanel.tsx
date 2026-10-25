@@ -91,7 +91,7 @@ export default function KnowledgePanel() {
       const result = await getKnowledgeMetadataOptions(token);
       setOptions(result);
     } catch (err) {
-      console.error('Failed to load metadata options', err);
+      console.error('加载筛选选项失败', err);
     }
   }, [token]);
 
@@ -101,7 +101,7 @@ export default function KnowledgePanel() {
       const res = await listPersonalDocuments(token);
       setDocuments(res.items || []);
     } catch (err) {
-      console.error('Failed to load personal documents', err);
+      console.error('加载个人文档失败', err);
     }
   }, [token]);
 

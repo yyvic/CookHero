@@ -120,7 +120,7 @@ export function UserProfileModal({ open, onClose }: UserProfileModalProps) {
 
   const handleSave = async () => {
     setError(null);
-    if (!token) return setError('Not authenticated');
+    if (!token) return setError('未登录');
     setLoading(true);
     try {
       const res = await updateProfile({ username, occupation, bio, profile, user_instruction: userInstruction }, token);
@@ -158,7 +158,7 @@ export function UserProfileModal({ open, onClose }: UserProfileModalProps) {
 
   const handleAddMcpServer = async () => {
     setError(null);
-    if (!token) return setError('Not authenticated');
+    if (!token) return setError('未登录');
     if (!mcpName.trim() || !mcpEndpoint.trim()) {
       return setError('请填写 MCP 名称和 Endpoint');
     }
@@ -220,7 +220,7 @@ export function UserProfileModal({ open, onClose }: UserProfileModalProps) {
 
   const handleUpdateMcpServer = async () => {
     setError(null);
-    if (!token) return setError('Not authenticated');
+    if (!token) return setError('未登录');
     if (!editingMcpName) return;
     if (!mcpEndpoint.trim()) {
       return setError('请填写 MCP Endpoint');
@@ -270,7 +270,7 @@ export function UserProfileModal({ open, onClose }: UserProfileModalProps) {
 
   const handleDeleteMcpServer = async (name: string) => {
     setError(null);
-    if (!token) return setError('Not authenticated');
+    if (!token) return setError('未登录');
     if (!window.confirm(`确认删除 MCP 服务器 ${name} 吗？`)) return;
 
     setMcpLoading(true);
@@ -307,7 +307,7 @@ export function UserProfileModal({ open, onClose }: UserProfileModalProps) {
 
   const handleAddSubagent = async () => {
     setError(null);
-    if (!token) return setError('Not authenticated');
+    if (!token) return setError('未登录');
     if (!agentName.trim() || !agentDisplayName.trim()) {
       return setError('请填写 Agent 名称和显示名称');
     }
@@ -365,7 +365,7 @@ export function UserProfileModal({ open, onClose }: UserProfileModalProps) {
 
   const handleUpdateSubagent = async () => {
     setError(null);
-    if (!token) return setError('Not authenticated');
+    if (!token) return setError('未登录');
     if (!editingAgentName) return;
     if (!agentDisplayName.trim()) {
       return setError('请填写 Agent 显示名称');
@@ -409,7 +409,7 @@ export function UserProfileModal({ open, onClose }: UserProfileModalProps) {
 
   const handleDeleteSubagent = async (name: string) => {
     setError(null);
-    if (!token) return setError('Not authenticated');
+    if (!token) return setError('未登录');
     setAgentLoading(true);
     try {
       await deleteSubagent(name, token);
@@ -456,7 +456,7 @@ export function UserProfileModal({ open, onClose }: UserProfileModalProps) {
           <button
             onClick={onClose}
             className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-200 transition-all duration-200"
-            aria-label="Close"
+            aria-label="关闭"
           >
             <X className="w-5 h-5" />
           </button>
@@ -927,7 +927,7 @@ function McpTab({
               />
             </FormField>
 
-            <FormField label="Endpoint (StreamableHTTP)">
+            <FormField label="接入点（StreamableHTTP）">
               <input
                 value={endpoint}
                 onChange={(e) => onEndpointChange(e.target.value)}
@@ -961,7 +961,7 @@ function McpTab({
                   />
                 </FormField>
 
-                <FormField label="Token">
+                <FormField label="令牌">
                   <input
                     value={authToken}
                     onChange={(e) => onAuthTokenChange(e.target.value)}
@@ -1042,7 +1042,7 @@ function McpTab({
                       type="button"
                       onClick={() => onEdit(server)}
                       className="p-2 rounded-lg text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all duration-200"
-                      aria-label={`Edit ${server.name}`}
+                      aria-label={`编辑 ${server.name}`}
                     >
                       <Pencil className="w-4 h-4" />
                     </button>
@@ -1050,7 +1050,7 @@ function McpTab({
                       type="button"
                       onClick={() => onDelete(server.name)}
                       className="p-2 rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition-all duration-200"
-                      aria-label={`Delete ${server.name}`}
+                      aria-label={`删除 ${server.name}`}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -1294,7 +1294,7 @@ function AgentTab({
                       onClick={() => onEdit(agent)}
                       disabled={loading}
                       className="p-2 rounded-lg text-gray-500 hover:text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all duration-200"
-                      aria-label={`Edit ${agent.display_name}`}
+                      aria-label={`编辑 ${agent.display_name}`}
                     >
                       <Pencil className="w-4 h-4" />
                     </button>
@@ -1302,7 +1302,7 @@ function AgentTab({
                       onClick={() => onDelete(agent.name)}
                       disabled={loading}
                       className="p-2 rounded-lg text-gray-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition-all duration-200"
-                      aria-label={`Delete ${agent.display_name}`}
+                      aria-label={`删除 ${agent.display_name}`}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>

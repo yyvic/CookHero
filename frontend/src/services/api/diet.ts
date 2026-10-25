@@ -65,7 +65,7 @@ export async function updateMeal(
   });
 
   if (!response.ok) {
-    throw new Error('Failed to update meal');
+    throw new Error('更新餐食失败');
   }
 }
 
@@ -163,7 +163,7 @@ export async function updateLog(
   });
 
   if (!response.ok) {
-    throw new Error('Failed to update log');
+    throw new Error('更新记录失败');
   }
 
   return response.json();
@@ -231,7 +231,7 @@ export async function updatePreferences(
   });
 
   if (!response.ok) {
-    throw new Error('Failed to update preferences');
+    throw new Error('更新偏好设置失败');
   }
 
   return response.json();
