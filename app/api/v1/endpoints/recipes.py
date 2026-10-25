@@ -10,7 +10,7 @@ import uuid
 from typing import List, Optional
 
 from fastapi import APIRouter, HTTPException, Query, status
-from sqlalchemy import func, or_, select
+from sqlalchemy import case, func, or_, select
 
 from app.database.models import KnowledgeDocumentModel
 from app.database.session import get_session_context
@@ -117,6 +117,9 @@ async def list_recipes(
         conditions.append(KnowledgeDocumentModel.category == category)
     if difficulty:
         conditions.append(KnowledgeDocumentModel.difficulty == difficulty)
+
+    # 菜名命中的排前面，否则搜「番茄」第一条会是正文里偶然提到番茄的其它菜
+    order_by = [KnowledgeDocumentModel.dish_name.asc()]
     if keyword:
         kw = "%" + keyword.strip() + "%"
         conditions.append(
@@ -125,6 +128,7 @@ async def list_recipes(
                 KnowledgeDocumentModel.content.ilike(kw),
             )
         )
+        order_by.insert(0, case((KnowledgeDocumentModel.dish_name.ilike(kw), 0), else_=1))
 
     async with get_session_context() as session:
         total = (
@@ -134,7 +138,7 @@ async def list_recipes(
             await session.execute(
                 select(KnowledgeDocumentModel)
                 .where(*conditions)
-                .order_by(KnowledgeDocumentModel.dish_name.asc())
+                .order_by(*order_by)
                 .limit(limit)
                 .offset(offset)
             )
