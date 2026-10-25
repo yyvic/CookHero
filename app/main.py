@@ -14,6 +14,7 @@ from app.api.v1.endpoints import (
     llm_stats,
     agent,
     diet,
+    recipes,
 )
 from app.config import settings
 from app.database.session import init_db, close_db
@@ -206,6 +207,7 @@ app.include_router(
 )
 app.include_router(agent.router, prefix=settings.API_V1_STR, tags=["Agent"])
 app.include_router(diet.router, prefix=settings.API_V1_STR, tags=["Diet"])
+app.include_router(recipes.router, prefix=settings.API_V1_STR, tags=["Recipes"])
 
 
 @app.get("/")

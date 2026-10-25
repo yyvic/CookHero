@@ -1,0 +1,29 @@
+{
+  "name": "cookhero-mobile",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "CookHero 移动端 PWA（手机浏览器打开后「添加到主屏幕」即可当 App 用）",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --base=/m/",
+    "icons": "python tools/gen_icons.py"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.10.1",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "tailwindcss": "^4.1.18",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "/m/",
+  "name": "CookHero 厨房英雄",
+  "short_name": "CookHero",
+  "description": "菜谱速查、AI 烹饪助手与饮食记录",
+  "start_url": "/m/",
+  "scope": "/m/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff7ed",
+  "theme_color": "#ee542c",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "菜谱速查",
+      "short_name": "菜谱",
+      "url": "/m/recipes"
+    },
+    {
+      "name": "AI 助手",
+      "short_name": "助手",
+      "url": "/m/chat"
+    },
+    {
+      "name": "饮食记录",
+      "short_name": "饮食",
+      "url": "/m/diet"
+    }
+  ]
+}
